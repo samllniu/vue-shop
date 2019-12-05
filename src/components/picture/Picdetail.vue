@@ -6,29 +6,31 @@
       <span class="click">点击:{{piclist.click}}</span>
     </p>
     <van-grid :column-num="3">
-  <van-grid-item v-for="(item,index) in thumimageslist " :key="index">
-    <van-image :src="item.src" />
-  </van-grid-item>
-</van-grid>
-<span>{{piclist.content}}</span>
+      <van-grid-item v-for="(item,index) in thumimageslist " :key="index" @click="showPic">
+        <van-image :src="item.src" />
+      </van-grid-item>
+    </van-grid>
+     <van-image-preview v-model="show" :images="images" @change="onChange" />
+    <span>{{piclist.content}}</span>
     <van-divider :style="{ color: 'grey', borderColor: '#1989fa', padding: '0 16px' }" />
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
-import { Grid, GridItem, Divider } from 'vant'
-
+import { Grid, GridItem, Divider, ImagePreview } from 'vant'
 Vue.use(Grid)
   .use(GridItem)
   .use(Divider)
+  .use(ImagePreview)
 export default {
   name: '',
   data () {
     return {
       id: 0,
       piclist: [],
-      thumimageslist: []
+      thumimageslist: [],
+      images: [],
+      show: false
     }
   },
   created () {
@@ -44,6 +46,13 @@ export default {
     async getthumimages () {
       const res = await this.$http.get('/api/getthumimages/' + this.id)
       this.thumimageslist = res.data.message
+      this.thumimageslist.forEach(item => {
+        this.images.push(item.src)
+      })
+    },
+    onChange () {},
+    showPic () {
+      this.show = true
     }
   }
 }
