@@ -33,9 +33,9 @@
     </van-grid>
     <van-tabbar v-model="active">
   <van-tabbar-item icon="home-o" name="0" to="/home">首页</van-tabbar-item>
-  <van-tabbar-item icon="search" name="1">购物车</van-tabbar-item>
+  <van-tabbar-item icon="search" name="1" to="">购物车</van-tabbar-item>
   <van-tabbar-item icon="friends-o" name="2" to="/search">搜索</van-tabbar-item>
-  <van-tabbar-item icon="setting-o" name="3">会员</van-tabbar-item>
+  <van-tabbar-item icon="setting-o" name="3" to="">会员</van-tabbar-item>
 </van-tabbar>
   </div>
 </template>
